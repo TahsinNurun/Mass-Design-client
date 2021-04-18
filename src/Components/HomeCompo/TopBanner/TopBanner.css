@@ -1,0 +1,9 @@
+.topBanner{
+    background-color:rgba(185, 133, 36, 0.719) ;
+    height: 80%;
+    content:' ';
+    position: relative;
+    /* top: 0; */
+    right: 0; 
+    z-index: -1;
+}

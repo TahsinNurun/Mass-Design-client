@@ -1,24 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import AddReview from "./Components/DashboardCompo/AddReview/AddReview";
+import BookList from "./Components/DashboardCompo/BookList/BookList";
+import ManageServices from "./Components/DashboardCompo/ManageServices/ManageServices";
+import Order from "./Components/DashboardCompo/Order/Order";
+import Home from "./Components/HomeCompo/Home/Home";
+import Login from "./Components/LoginCompo/Login/Login";
+import PrivateRoute from "./Components/LoginCompo/PrivateRoute/PrivateRoute";
+import AddService from "./Components/DashboardCompo/AddService/AddService";
+import MakeAdmin from "./Components/DashboardCompo/MakeAdmin/MakeAdmin";
+import OrderList from "./Components/DashboardCompo/OrderList/OrderList";
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({})
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <p>Name: {loggedInUser.name}</p>
+      <a href="/"><button className="btn-brand">Home</button></a>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home></Home>
+        </Route>
+        <Route path="/addService">
+          <AddService></AddService>
+        </Route>
+        <Route path="/login">
+          <Login></Login>
+        </Route>
+        <PrivateRoute path="/order/:serviceId">
+          <Order ></Order>
+        </PrivateRoute>
+        <Route path="/makeAdmin">
+          <MakeAdmin></MakeAdmin>
+        </Route>
+        <Route path="/bookList">
+          <BookList></BookList>
+        </Route>
+        
+        <Route path="/manageServices">
+          <ManageServices></ManageServices>
+        </Route>
+        <Route path="/addReview">
+          <AddReview></AddReview>
+        </Route>
+        <Route path="/orderList">
+          <OrderList></OrderList>
+        </Route>
+      </Switch>
+    </Router>
+    </UserContext.Provider>
   );
 }
 
