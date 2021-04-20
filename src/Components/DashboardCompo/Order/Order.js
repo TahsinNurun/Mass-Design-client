@@ -30,7 +30,7 @@ const Order = () => {
         };
         
         
-        fetch('http://localhost:5000/addOrder', { 
+        fetch('https://limitless-dusk-84969.herokuapp.com/addOrder', { 
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(orderDetails)
@@ -50,7 +50,7 @@ const Order = () => {
     
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://limitless-dusk-84969.herokuapp.com/services')
             .then(res => res.json())
             // .then(data => console.log(data));
             .then(data => setExactService(data));

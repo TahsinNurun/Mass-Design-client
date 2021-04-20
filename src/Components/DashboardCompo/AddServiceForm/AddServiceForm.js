@@ -14,7 +14,7 @@ const AddServiceForm = () => {
             price: data.price,
             description: data.description
         };
-        const url =`http://localhost:5000/addService`;
+        const url =`https://limitless-dusk-84969.herokuapp.com/addService`;
         // console.log(eventData)
         fetch(url,{
             method: 'POST',

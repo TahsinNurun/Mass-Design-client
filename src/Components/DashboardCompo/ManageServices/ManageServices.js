@@ -6,13 +6,13 @@ const ManageServices = ({ service }) => {
     const [serviceData, setServiceData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://limitless-dusk-84969.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setServiceData(data))
     }, [])
 
     const deleteService = id =>{
-        fetch(`http://localhost:5000/delete/${id}`,{
+        fetch(`https://limitless-dusk-84969.herokuapp.com/delete/${id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())

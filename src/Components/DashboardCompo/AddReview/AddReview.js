@@ -14,7 +14,7 @@ const AddReview = () => {
             review: data.review,
             image: image
         };
-        const url = `http://localhost:5000/addReview`
+        const url = `https://limitless-dusk-84969.herokuapp.com/addReview`
 
         console.log(eventData);
         fetch(url, {

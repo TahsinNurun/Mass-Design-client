@@ -8,7 +8,7 @@ const BookList = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/orderBySpecificEmail',{
+        fetch('https://limitless-dusk-84969.herokuapp.com/orderBySpecificEmail',{
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify({email: loggedInUser.email})
