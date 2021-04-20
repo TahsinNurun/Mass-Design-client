@@ -11,35 +11,43 @@ const textStyle = { border: "4px solid black", padding: '3px' }
 
 const Order = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [serviceData,setServiceData] = useState(null);
+    const [serviceData,setServiceData] = useState({});
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const onSubmit = data => {
         setServiceData(data);
+        console.log(data);
     };
 
     const handlePaymentSuccess = paymentId => {
+        // const {title, price} = serviceData;
+        // console.log(serviceData);
         const orderDetails ={
             ...loggedInUser,
-            service: serviceData,
+            title: service.title,
+            price: service.price,
             paymentId
         };
         
         
         fetch('http://localhost:5000/addOrder', { 
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
+            headers: {'content-type': 'application/json'},
             body: JSON.stringify(orderDetails)
         })
         .then(res => console.log('server side res', res))
     }
 
-    const { id } = useParams();
+    const {_id} = useParams();
+    console.log(_id);
 
     const [exactService, setExactService] = useState([]);
-    const service = exactService.find(td => td.id == id);
+    console.log(exactService);
+    const service = exactService.find(td => td._id == _id);
+    useEffect(() => {
+        setServiceData(service); 
+    }, []);
+    
 
     useEffect(() => {
         fetch('http://localhost:5000/services')
@@ -56,16 +64,18 @@ const Order = () => {
                 </div>
 
                 <div className="col-md-9 row">
+                    
                     <div style={{display: serviceData ? 'none': 'block'}} className="col-md-6 ">
+                        <h4>{service?.title}</h4>
                         <form  onSubmit={handleSubmit(onSubmit)}>
 
-                            <input name="name" defaultValue={loggedInUser.displayName} {...register("name")} placeholder="Your Name" />
+                            {/* <input name="name" defaultValue={loggedInUser.displayName} {...register("name")} placeholder="Your Name" />
 
-                            <input name="email" defaultValue={loggedInUser.email} {...register("email")} placeholder="Your Email" />
+                            <input name="email" defaultValue={loggedInUser.email} {...register("email")} placeholder="Your Email" /> */}
 
-                            <input name="title" defaultValue={service?.title} {...register("title")} placeholder="service title" />
+                            <input  defaultValue={service?.title} {...register("title")} placeholder="service title" />
 
-                            <input name="price" defaultValue={service?.price} {...register("price")} placeholder="service title" />
+                            <input  defaultValue={service?.price} {...register("price")} placeholder="service price" />
 
                             <input type="submit" />
                         </form>

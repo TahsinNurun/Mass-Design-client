@@ -30,7 +30,7 @@ const OrderList = () => {
                                 orders.map((order, index) =>
                                     <tr>
                                         <td className="m-2">{order.title}</td>
-                                        <td className="m-2">${order.price}</td>
+                                        <td className="m-2">{order.name}</td>
                                         <td className="m-2">{order.email}</td>
                                     </tr>
                                 )

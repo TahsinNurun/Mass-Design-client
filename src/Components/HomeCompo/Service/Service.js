@@ -12,7 +12,7 @@ const Service = () => {
     }, [])
 
     return (
-        <section className="container">
+        <section className="container" id="service">
             <div className="text-center mt-5 pt-5">
                 <h5>Our Services</h5>
                 <h3>We provide turn-key solutions <br/> for all construction projects</h3>

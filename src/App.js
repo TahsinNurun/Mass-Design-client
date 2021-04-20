@@ -24,19 +24,20 @@ function App() {
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <p>Name: {loggedInUser.name}</p>
-      <a href="/"><button className="btn-brand">Home</button></a>
+     
     <Router>
+      <Link to="/"><button className="btn-brand">Home</button></Link>
       <Switch>
         <Route exact path="/">
           <Home></Home>
         </Route>
-        <Route path="/addService">
+        <PrivateRoute path="/addService">
           <AddService></AddService>
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
           <Login></Login>
         </Route>
-        <PrivateRoute path="/order/:serviceId">
+        <PrivateRoute path="/order/:_id">
           <Order ></Order>
         </PrivateRoute>
         <Route path="/makeAdmin">

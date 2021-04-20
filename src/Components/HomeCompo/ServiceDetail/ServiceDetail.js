@@ -11,8 +11,7 @@ const ServiceDetail = ({ service }) => {
                 <small><p className="card-text">{service.description}</p></small>
                 <Link to={`/order/${service._id}`} >
                     <button className="btn-brand m-5">Book a meeting</button>
-                </Link>
-                
+                </Link>     
             </div>
         </div>
     );

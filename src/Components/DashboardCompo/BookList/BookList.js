@@ -7,12 +7,16 @@ const BookList = () => {
     const [orders, setOrders] = useState([]);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
-
     useEffect(() => {
-        fetch('http://localhost:5000/orders?email='+loggedInUser.emails)
-            .then(res => res.json())
-            .then(data => setOrders(data));
+        fetch('http://localhost:5000/orderBySpecificEmail',{
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({email: loggedInUser.email})
+        })
+        .then(res => res.json())
+        .then(data => setOrders(data))
     }, [])
+
     return (
         <div className="container">
             <div className="row justify-content-between">
@@ -22,12 +26,14 @@ const BookList = () => {
 
                 <div className="col-md-9 row">
                     <div>
-                        <h2>you have {orders.length} order</h2>
+                        <h2>{loggedInUser.name} have {orders.length} order</h2>
                     </div>
-                    <div>
-                        {
-                            orders.map(order => <BookCard order={order}></BookCard>)
-                        }
+                    <div className="justify-content-center">
+                        <div className="w-90 row mt-2 pt-2">
+                            {
+                                orders.map(order => <BookCard order={order}></BookCard>)
+                            }
+                        </div>
                     </div>
 
                 </div>
